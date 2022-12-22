@@ -1,0 +1,20 @@
+package com.sample
+
+declare Question
+    requiredQuestion : String
+    requiredAnswer : String
+    question : String
+    answers : String[]
+end
+
+declare Answer
+    question : String
+    answer : String
+end
+
+declare Book
+    question : String
+    answer : String
+    book : String
+    author : String
+end

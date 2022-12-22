@@ -1,0 +1,30 @@
+package com.sample
+ 
+import com.sample.Prompts
+
+global javax.swing.JFrame frame;
+
+rule "Init"
+    when
+    	not Answer()
+    	Question(requiredQuestion == null, requiredAnswer == null, question : question, answers : answers)
+    then
+        insert(new Answer(question, Prompts.AskQuestion(frame, question, answers)));
+end
+
+rule "Ask"
+    when
+    	Answer(q : question, a : answer)
+    	Question(requiredQuestion == q, requiredAnswer == a, question : question, answers : answers)
+    then
+       insert(new Answer(question, Prompts.AskQuestion(frame, question, answers)));
+end
+
+rule "Book"
+    when
+    	Answer(q : question, a : answer)
+    	Book(question == q, answer == a, question : question, book : book, author : author)
+    then
+       Prompts.Done(frame, book, author);
+end
+
