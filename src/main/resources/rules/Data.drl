@@ -1,7 +1,8 @@
 package com.sample
 import java.util.*;
 
-rule "Hi"
+// NO LONGER USED
+/*rule "Hi"
     when
     then
     
@@ -150,4 +151,4 @@ rule "Hi"
 												insert(new Question("BIOGRAPHY", "NO", "AUTO-BIOGRAPHY?", new String[]{"NO", "USE YOUR WORDS", "HACKS"}));
 													insert(new Book("AUTO-BIOGRAPHY?", "USE YOUR WORDS", "I KNOW WHY THE CAGED BIRD SINGS", "MAYA ANGELOU"));
 													insert(new Book("AUTO-BIOGRAPHY?", "HACKS", "GHOST IN THE WIRES", "KEVIN MITNICK"));																		
-end
+end*/

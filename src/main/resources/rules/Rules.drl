@@ -4,27 +4,1020 @@ import com.sample.Prompts
 
 global javax.swing.JFrame frame;
 
-rule "Init"
+
+rule "FICTION PLEASE"
     when
-    	not Answer()
-    	Question(requiredQuestion == null, requiredAnswer == null, question : question, answers : answers)
+            not Answer()
     then
-        insert(new Answer(question, Prompts.AskQuestion(frame, question, answers)));
+       insert(new Answer("FICTION PLEASE", Prompts.AskQuestion(frame, "FICTION PLEASE", new String[]{"CLASSIC FICTION", "TAKE ME TO NONFICTION."})));
 end
 
-rule "Ask"
+rule "CLASSIC FICTION"
     when
-    	Answer(q : question, a : answer)
-    	Question(requiredQuestion == q, requiredAnswer == a, question : question, answers : answers)
+            Answer(question == "FICTION PLEASE", answer == "CLASSIC FICTION")
     then
-       insert(new Answer(question, Prompts.AskQuestion(frame, question, answers)));
+       insert(new Answer("CLASSIC FICTION", Prompts.AskQuestion(frame, "CLASSIC FICTION", new String[]{"NO", "HIGH SOCIETY?"})));
 end
 
-rule "Book"
+rule "HIGH SOCIETY?"
     when
-    	Answer(q : question, a : answer)
-    	Book(question == q, answer == a, question : question, book : book, author : author)
+            Answer(question == "CLASSIC FICTION", answer == "HIGH SOCIETY?")
     then
-       Prompts.Done(frame, book, author);
+       insert(new Answer("HIGH SOCIETY?", Prompts.AskQuestion(frame, "HIGH SOCIETY?", new String[]{"NO", "RELATIONSHIP INTRIGUE?", "RUSSIAN LIT?" ,"I'M AN ANGLOPHILE"})));
 end
+
+rule "I'M AN ANGLOPHILE"
+    when
+            Answer(question == "HIGH SOCIETY?", answer == "I'M AN ANGLOPHILE")
+    then
+       insert(new Answer("I'M AN ANGLOPHILE", Prompts.AskQuestion(frame, "I'M AN ANGLOPHILE", new String[]{"MAKE IT PLAY", "GROWING UP RICH", "A FALL FROM A GRACE"})));
+end
+
+rule "SENSE AND SENSIBILITY"
+    when
+            Answer(question == "I'M AN ANGLOPHILE", answer == "A FALL FROM A GRACE")
+    then
+       Prompts.Done(frame, "SENSE AND SENSIBILITY", "JANE AUSTEN");
+end
+
+rule "JANE EYRE"
+    when
+            Answer(question == "I'M AN ANGLOPHILE", answer == "GROWING UP RICH")
+    then
+       Prompts.Done(frame, "JANE EYRE", "CHARLOTTE BRONTE");
+end
+
+rule "THE TAMING OF THE SHREW"
+    when
+            Answer(question == "I'M AN ANGLOPHILE", answer == "MAKE IT PLAY")
+    then
+       Prompts.Done(frame, "THE TAMING OF THE SHREW", "WILLIAM SHAKESPEARE");
+end
+
+rule "RUSSIAN LIT?"
+    when
+            Answer(question == "HIGH SOCIETY?", answer == "RUSSIAN LIT?")
+    then
+       insert(new Answer("RUSSIAN LIT?", Prompts.AskQuestion(frame, "RUSSIAN LIT?", new String[]{"NARCISSISM", "NIHILISM"})));
+end
+
+rule "FATHERS AND SONS"
+    when
+            Answer(question == "RUSSIAN LIT?", answer == "NIHILISM")
+    then
+       Prompts.Done(frame, "FATHERS AND SONS", "IVAN TURGENEV");
+end
+
+rule "ANNA KARENINA"
+    when
+            Answer(question == "RUSSIAN LIT?", answer == "NARCISSISM")
+    then
+       Prompts.Done(frame, "ANNA KARENINA", "LEO TOLSTOY");
+end
+
+rule "RELATIONSHIP INTRIGUE?"
+    when
+            Answer(question == "HIGH SOCIETY?", answer == "RELATIONSHIP INTRIGUE?")
+    then
+       insert(new Answer("RELATIONSHIP INTRIGUE?", Prompts.AskQuestion(frame, "RELATIONSHIP INTRIGUE?", new String[]{"NEW MONEY", "OLD MONEY"})));
+end
+
+rule "REBECCA"
+    when
+            Answer(question == "RELATIONSHIP INTRIGUE?", answer == "OLD MONEY")
+    then
+       Prompts.Done(frame, "REBECCA", "DAPHNE DU MAURIER");
+end
+
+rule "THE GREAT GATSBY"
+    when
+            Answer(question == "RELATIONSHIP INTRIGUE?", answer == "NEW MONEY")
+    then
+       Prompts.Done(frame, "THE GREAT GATSBY", "F. SCOTT FITZGERALD");
+end
+
+rule "SOCIAL ISSUES?"
+    when
+            Answer(question == "HIGH SOCIETY?", answer == "NO")
+    then
+       insert(new Answer("SOCIAL ISSUES?", Prompts.AskQuestion(frame, "SOCIAL ISSUES?", new String[]{"NO", "DO YOU HAVE ANY CLASS?", "RACE IN AMERICA?", "POLITICAL ALLEGORY"})));
+end
+
+rule "ANIMAL FARM"
+    when
+            Answer(question == "SOCIAL ISSUES?", answer == "POLITICAL ALLEGORY")
+    then
+       Prompts.Done(frame, "ANIMAL FARM", "GEORGE ORWELL");
+end
+
+rule "RACE IN AMERICA?"
+    when
+            Answer(question == "SOCIAL ISSUES?", answer == "RACE IN AMERICA?")
+    then
+       insert(new Answer("RACE IN AMERICA?", Prompts.AskQuestion(frame, "RACE IN AMERICA?", new String[]{"POST SLAVERY", "PRE SLAVERY"})));
+end
+
+rule "UNCLE TOM'S CABIN"
+    when
+            Answer(question == "RACE IN AMERICA?", answer == "PRE SLAVERY")
+    then
+       Prompts.Done(frame, "UNCLE TOM'S CABIN", "HARRIET BECHER STOWVE");
+end
+
+rule "COLOR PURPLE"
+    when
+            Answer(question == "RACE IN AMERICA?", answer == "POST SLAVERY")
+    then
+       Prompts.Done(frame, "COLOR PURPLE", "ALICE WALKER");
+end
+
+rule "DO YOU HAVE ANY CLASS?"
+    when
+            Answer(question == "SOCIAL ISSUES?", answer == "DO YOU HAVE ANY CLASS?")
+    then
+       insert(new Answer("DO YOU HAVE ANY CLASS?", Prompts.AskQuestion(frame, "DO YOU HAVE ANY CLASS?", new String[]{"ENGLAND", "FRANCE"})));
+end
+
+rule "LESS MISERABLES"
+    when
+            Answer(question == "DO YOU HAVE ANY CLASS?", answer == "FRANCE")
+    then
+       Prompts.Done(frame, "LESS MISERABLES", "VICTOR HUGO");
+end
+
+rule "OLIVER TWIST"
+    when
+            Answer(question == "DO YOU HAVE ANY CLASS?", answer == "ENGLAND")
+    then
+       Prompts.Done(frame, "OLIVER TWIST", "CHARLES DICKENS");
+end
+
+rule "ADVENTURE TIME?"
+    when
+            Answer(question == "SOCIAL ISSUES?", answer == "NO")
+    then
+       insert(new Answer("ADVENTURE TIME?", Prompts.AskQuestion(frame, "ADVENTURE TIME?", new String[]{"NO", "LETS PLAY WAR.", "LOOKING FOR SOMETHING"})));
+end
+
+rule "LETS PLAY WAR."
+    when
+            Answer(question == "ADVENTURE TIME?", answer == "LETS PLAY WAR.")
+    then
+       insert(new Answer("LETS PLAY WAR.", Prompts.AskQuestion(frame, "LETS PLAY WAR.", new String[]{"SPANISH CIVIL WAR", "WORLD WAR II"})));
+end
+
+rule "FOR WHOM THE BELL TOLLS"
+    when
+            Answer(question == "LETS PLAY WAR", answer == "SPANISH CIVIL WAR")
+    then
+       Prompts.Done(frame, "FOR WHOM THE BELL TOLLS", "ERNEST HEMINGWAY");
+end
+
+rule "CATCH 22"
+    when
+            Answer(question == "LETS PLAY WAR", answer == "WORLD WAR II")
+    then
+       Prompts.Done(frame, "CATCH 22", "JOSEPH HELLER");
+end
+
+rule "LOOKING FOR SOMETHING"
+    when
+            Answer(question == "ADVENTURE TIME?", answer == "LOOKING FOR SOMETHING")
+    then
+       insert(new Answer("LOOKING FOR SOMETHING", Prompts.AskQuestion(frame, "LOOKING FOR SOMETHING", new String[]{"PURE EVIL", "AN EPIC HUNT", "REVENGE"})));
+end
+
+rule "HEART OF DARKNESS"
+    when
+            Answer(question == "LOOKING FOR SOMETHING", answer == "PURE EVIL")
+    then
+       Prompts.Done(frame, "HEART OF DARKNESS", "JOSEPH CONRAD");
+end
+
+rule "MOBY DICK"
+    when
+            Answer(question == "LOOKING FOR SOMETHING", answer == "AN EPIC HUNT")
+    then
+       Prompts.Done(frame, "MOBY DICK", "HERMAN MELVILLE");
+end
+
+rule "THE COUNT OF MONTE CRISTO"
+    when
+            Answer(question == "LOOKING FOR SOMETHING", answer == "REVENGE")
+    then
+       Prompts.Done(frame, "THE COUNT OF MONTE CRISTO", "ALEXANDRE DUMAS");
+end
+
+rule "AMERICANA?"
+    when
+            Answer(question == "ADVENTURE TIME?", answer == "NO")
+    then
+       insert(new Answer("AMERICANA?", Prompts.AskQuestion(frame, "AMERICANA?", new String[]{"NO", "CALIFORNIA", "THE SOUTH"})));
+end
+
+rule "OF MICE AND MEN"
+    when
+            Answer(question == "AMERICANA?", answer == "CALIFORNIA")
+    then
+       Prompts.Done(frame, "OF MICE AND MEN", "JOHN STEINBECK");
+end
+
+rule "ADVENTURES OF HUCKLEBERRY FINN"
+    when
+            Answer(question == "AMERICANA?", answer == "THE SOUTH")
+    then
+       Prompts.Done(frame, "ADVENTURES OF HUCKLEBERRY FINN", "MARK TWAIN");
+end
+
+rule "FANTASY?"
+    when
+            Answer(question == "AMERICANA?", answer == "NO")
+    then
+       insert(new Answer("FANTASY?", Prompts.AskQuestion(frame, "FANTASY?", new String[]{"NO", "ABSURDIST MUTATION", "MASSIVE EPIC", "DON'T BITE ME BRO"})));
+end
+
+rule "THE METAMORPHOSIS"
+    when
+            Answer(question == "FANTASY?", answer == "ABSURDIST MUTATION")
+    then
+       Prompts.Done(frame, "THE METAMORPHOSIS", "FRANZ KAFKA");
+end
+
+rule "LORD OF THE RINGS"
+    when
+            Answer(question == "FANTASY?", answer == "MASSIVE EPIC")
+    then
+       Prompts.Done(frame, "LORD OF THE RINGS", "J.R.R. TOLKIEN");
+end
+
+rule "I AM LEGEND"
+    when
+            Answer(question == "FANTASY?", answer == "DON'T BITE ME BRO")
+    then
+       Prompts.Done(frame, "I AM LEGEND", "RICHARD MATHESON");
+end
+
+rule "CLASSIC SCI-FI?"
+    when
+            Answer(question == "FANTASY?", answer == "NO")
+    then
+       insert(new Answer("CLASSIC SCI-FI?", Prompts.AskQuestion(frame, "CLASSIC SCI-FI?", new String[]{"NO", "I CAN'T WAIT FOR THE FURUTE", "TIME TRAVEL", "END OF THE WORLD"})));
+end
+
+rule "SLAUGHTER HOUSE FIVE"
+    when
+            Answer(question == "CLASSIC SCI-FI?", answer == "TIME TRAVEL")
+    then
+       Prompts.Done(frame, "SLAUGHTER HOUSE FIVE", "KURT VONNEGUT JR.");
+end
+
+rule "CAT'S CRADLE"
+    when
+            Answer(question == "CLASSIC SCI-FI?", answer == "END OF THE WORLD")
+    then
+       Prompts.Done(frame, "CAT'S CRADLE", "KURT VONNEGUT JR.");
+end
+
+rule "I CAN'T WAIT FOR THE FURUTE"
+    when
+            Answer(question == "CLASSIC SCI-FI?", answer == "I CAN'T WAIT FOR THE FURUTE")
+    then
+       insert(new Answer("I CAN'T WAIT FOR THE FURUTE", Prompts.AskQuestion(frame, "I CAN'T WAIT FOR THE FURUTE", new String[]{"INFORMATION CONTROL", "GENETICALLY ENGENEERED HUMANS", "THOUGHT POLICE"})));
+end
+
+rule "FAHRENHEIT 451"
+    when
+            Answer(question == "I CAN'T WAIT FOR THE FURUTE", answer == "INFORMATION CONTROL")
+    then
+       Prompts.Done(frame, "FAHRENHEIT 451", "RAY BRADBURY");
+end
+
+rule "BRAVE NEW WORLD"
+    when
+            Answer(question == "I CAN'T WAIT FOR THE FURUTE", answer == "GENETICALLY ENGENEERED HUMANS")
+    then
+       Prompts.Done(frame, "BRAVE NEW WORLD", "ALDOUS HUXLEY");
+end
+
+rule "1984"
+    when
+            Answer(question == "I CAN'T WAIT FOR THE FURUTE", answer == "THOUGHT POLICE")
+    then
+       Prompts.Done(frame, "1984", "GEORGE ORWELL");
+end
+
+rule "MAGIC REALISM?"
+    when
+            Answer(question == "CLASSIC SCI-FI?", answer == "NO")
+    then
+       insert(new Answer("MAGIC REALISM?", Prompts.AskQuestion(frame, "MAGIC REALISM?", new String[]{"NO", "AN INDIVIDUAL'S PLIGHT", "EPIC"})));
+end
+
+rule "THE PICTURE OF DORIAN GRAY"
+    when
+            Answer(question == "MAGIC REALISM?", answer == "AN INDIVIDUAL'S PLIGHT")
+    then
+       Prompts.Done(frame, "THE PICTURE OF DORIAN GRAY", "OSCAR WILDE");
+end
+
+rule "ONE HUNDRED YEARS OF SOLITUDE"
+    when
+            Answer(question == "MAGIC REALISM?", answer == "EPIC")
+    then
+       Prompts.Done(frame, "ONE HUNDRED YEARS OF SOLITUDE", "GABRIEL GARCIA MARQUEZ");
+end
+
+rule "CLASSIC SHORT STORIES?"
+    when
+            Answer(question == "MAGIC REALISM?", answer == "NO")
+    then
+       insert(new Answer("CLASSIC SHORT STORIES?", Prompts.AskQuestion(frame, "CLASSIC SHORT STORIES?", new String[]{"NO", "THE ONE AND ONLY"})));
+end
+
+rule "SELECTED TALES"
+    when
+            Answer(question == "CLASSIC SHORT STORIES?", answer == "CLASSIC THE ONE AND ONLY")
+    then
+       Prompts.Done(frame, "SELECTED TALES", "EDGAR ALLAN POE");
+end
+
+rule "POETRY?"
+    when
+            Answer(question == "CLASSIC SHORT STORIES?", answer == "NO")
+    then
+       insert(new Answer("POETRY?", Prompts.AskQuestion(frame, "POETRY?", new String[]{"CONTEMPORARY", "WORDS OF THE YOUNG", "AMERICAN CLASSIC"})));
+end
+
+rule "THE COLLECTED POEMS"
+    when
+            Answer(question == "POETRY?", answer == "AMERICAN CLASSIC")
+    then
+       Prompts.Done(frame, "THE COLLECTED POEMS", "LANGSTON HUGHES");
+end
+
+rule "CONTEMPORARY"
+    when
+            Answer(question == "POETRY?", answer == "CONTEMPORARY")
+    then
+       insert(new Answer("CONTEMPORARY", Prompts.AskQuestion(frame, "CONTEMPORARY", new String[]{"COLLECTIONS", "ONE MAN SHOW"})));
+end
+
+rule "POETRY 180"
+    when
+            Answer(question == "CONTEMPORARY", answer == "COLLECTIONS")
+    then
+       Prompts.Done(frame, "POETRY 180", "BILLY COLLINS");
+end
+
+rule "SAIUNG ALONE AROUND THE ROOM"
+    when
+            Answer(question == "CONTEMPORARY", answer == "ONE MAN SHOW")
+    then
+       Prompts.Done(frame, "SAIUNG ALONE AROUND THE ROOM", "BILLY COLLINS");
+end
+
+rule "WORDS OF THE YOUNG"
+    when
+            Answer(question == "POETRY?", answer == "WORDS OF THE YOUNG")
+    then
+       insert(new Answer("WORDS OF THE YOUNG", Prompts.AskQuestion(frame, "WORDS OF THE YOUNG", new String[]{"BY BOYS", "BY GIRLS"})));
+end
+
+rule "YOU HEAR ME?"
+    when
+            Answer(question == "WORDS OF THE YOUNG", answer == "BY BOYS")
+    then
+       Prompts.Done(frame, "YOU HEAR ME?", "BETSY FRANCO");
+end
+
+rule "THINGS I HAVE TO TELL YOU"
+    when
+            Answer(question == "WORDS OF THE YOUNG", answer == "BY GIRLS")
+    then
+       Prompts.Done(frame, "THINGS I HAVE TO TELL YOU", "BETSY FRANCO");
+end
+
+rule "HISTORICAL FICTION?"
+    when
+            Answer(question == "CLASSIC FICTION", answer == "NO")
+    then
+       insert(new Answer("HISTORICAL FICTION?", Prompts.AskQuestion(frame, "HISTORICAL FICTION?", new String[]{"NO", "FOUL PLAY", "THE POLITICAL SCENE" ,"FAMILY TIES", "GOD BLESS RELIGION"})));
+end
+
+rule "FOUL PLAY"
+    when
+            Answer(question == "HISTORICAL FICTION?", answer == "FOUL PLAY")
+    then
+       insert(new Answer("FOUL PLAY", Prompts.AskQuestion(frame, "FOUL PLAY", new String[]{"THIS ISLAND IS NOT BIG ENOUGH...", "POETIC SERIAL KILLER"})));
+end
+
+rule "SNOW FALLING ON CEDARS"
+    when
+            Answer(question == "FOUL PLAY", answer == "THIS ISLAND IS NOT BIG ENOUGH...")
+    then
+       Prompts.Done(frame, "SNOW FALLING ON CEDARS", "DAVID GUTERSON");
+end
+
+rule "DANTE CLUB"
+    when
+            Answer(question == "FOUL PLAY", answer == "POETIC SERIAL KILLERS")
+    then
+       Prompts.Done(frame, "DANTE CLUB", "MATTHEW PEARL");
+end
+
+rule "THE POLITICAL SCENE"
+    when
+            Answer(question == "HISTORICAL FICTION?", answer == "THE POLITICAL SCENE")
+    then
+       insert(new Answer("THE POLITICAL SCENE", Prompts.AskQuestion(frame, "THE POLITICAL SCENE", new String[]{"A DARK 'WHAT IF?'", "REAL ESTATE AND ISLAND LIVING"})));
+end
+
+rule "THE PLOT AGAINST AMERICA"
+    when
+            Answer(question == "THE POLITICAL SCENE", answer == "A DARK 'WHAT IF?'")
+    then
+       Prompts.Done(frame, "THE PLOT AGAINST AMERICA", "PHILIP ROTH");
+end
+
+rule "THE RUM DIARY"
+    when
+            Answer(question == "THE POLITICAL SCENE", answer == "REAL ESTATE AND ISLAND LIVING")
+    then
+       Prompts.Done(frame, "THE RUM DIARY", "HUNTER S. THOMPSON");
+end
+
+rule "FAMILY TIES"
+    when
+            Answer(question == "HISTORICAL FICTION?", answer == "FAMILY TIES")
+    then
+       insert(new Answer("FAMILY TIES", Prompts.AskQuestion(frame, "FAMILY TIES", new String[]{"I WANT A BABY BROTHER", "TRAGEDY STRIKES"})));
+end
+
+rule "HALF BROTHERS"
+    when
+            Answer(question == "FAMILY TIES", answer == "I WANT A BABY BROTHER")
+    then
+       Prompts.Done(frame, "HALF BROTHERS", "KENNETH OPPEL");
+end
+
+rule "A GREAT AND TERRBILE BEAUTY"
+    when
+            Answer(question == "FAMILY TIES", answer == "TRAGEDY STRIKES")
+    then
+       Prompts.Done(frame, "A GREAT AND TERRBILE BEAUTY", "LIBBA BRAY");
+end
+
+rule "GOD BLESS RELIGION"
+    when
+            Answer(question == "HISTORICAL FICTION?", answer == "GOD BLESS RELIGION")
+    then
+       insert(new Answer("GOD BLESS RELIGION", Prompts.AskQuestion(frame, "GOD BLESS RELIGION", new String[]{"A MISSIONARY FAMILY IN AFRICA", "CATHOLICISM IN THE WILD WEST", "THE CORNER STONE"})));
+end
+
+rule "THE POISONWOOD BIBLE"
+    when
+            Answer(question == "GOD BLESS RELIGION", answer == "A MISSIONARY FAMILY IN AFRICA")
+    then
+       Prompts.Done(frame, "THE POISONWOOD BIBLE", "BARBARA KINGSOLVER");
+end
+
+rule "BEATH COMES FOR THE ARCBISHOP"
+    when
+            Answer(question == "GOD BLESS RELIGION", answer == "CATHOLICISM IN THE WILD WEST")
+    then
+       Prompts.Done(frame, "BEATH COMES FOR THE ARCBISHOP", "WILLA CATHER");
+end
+
+rule "THE PILLARS OF EARTH"
+    when
+            Answer(question == "GOD BLESS RELIGION", answer == "THE CORNER STONE")
+    then
+       Prompts.Done(frame, "THE PILLARS OF EARTH", "KEN FOLLETT");
+end
+
+rule "THAT'S MYTERIOUS"
+    when
+            Answer(question == "HISTORICAL FICTION?", answer == "NO")
+    then
+       insert(new Answer("THAT'S MYTERIOUS", Prompts.AskQuestion(frame, "THAT'S MYTERIOUS", new String[]{"NO", "FAMILY", "MURDER"})));
+end
+
+rule "EXTREMELY LOUD AND INCREDIBLY CLOSE"
+    when
+            Answer(question == "THAT'S MYTERIOUS", answer == "FAMILY")
+    then
+       Prompts.Done(frame, "EXTREMELY LOUD AND INCREDIBLY CLOSE", "JONATHAN SAFRAN FOER");
+end
+
+rule "THE CURIOUS INCIDENT OF THE DOG IN THE NIGHT-TIME"
+    when
+            Answer(question == "THAT'S MYTERIOUS", answer == "MURDER")
+    then
+       Prompts.Done(frame, "THE CURIOUS INCIDENT OF THE DOG IN THE NIGHT-TIME", "MARK HADDON");
+end
+
+rule "VIOLENT YOUTH?"
+    when
+            Answer(question == "THAT'S MYTERIOUS", answer == "NO")
+    then
+       insert(new Answer("VIOLENT YOUTH?", Prompts.AskQuestion(frame, "VIOLENT YOUTH?", new String[]{"NO", "MILITARY THERAPY", "TEEN ANGST", "SCHOOL SHOOTING", "AFGAN CASTE SYSTEM", "CHILD SOLIDERS"})));
+end
+
+rule "BOOT CAMP"
+    when
+            Answer(question == "VIOLENT YOUTH?", answer == "MILITARY THERAPY")
+    then
+       Prompts.Done(frame, "BOOT CAMP", "TODD STRASSER");
+end
+
+rule "FUGHT"
+    when
+            Answer(question == "VIOLENT YOUTH?", answer == "TEEN ANGST")
+    then
+       Prompts.Done(frame, "FUGHT", "SHERMAN ALEXIE");
+end
+
+rule "NINETEEN MINUTES"
+    when
+            Answer(question == "VIOLENT YOUTH?", answer == "SCHOOL SHOOTING")
+    then
+       Prompts.Done(frame, "NINETEEN MINUTES", "JODI PICOULT");
+end
+
+rule "KITE RUNNER"
+    when
+            Answer(question == "VIOLENT YOUTH?", answer == "AFGAN CASTE SYSTEM")
+    then
+       Prompts.Done(frame, "KITE RUNNER", "KHALED HOSSEINI");
+end
+
+rule "WHAT IS THE WHAT"
+    when
+            Answer(question == "VIOLENT YOUTH?", answer == "CHILD SOLIDERS")
+    then
+       Prompts.Done(frame, "WHAT IS THE WHAT", "DAVE EGGERS");
+end
+
+rule "DARK FICTION?"
+    when
+            Answer(question == "VIOLENT YOUTH?", answer == "NO")
+    then
+       insert(new Answer("DARK FICTION?", Prompts.AskQuestion(frame, "DARK FICTION?", new String[]{"NO", "A MEMORY OF A TROUBLED FAMILY", "GHOST IN THE ROOM", "A FAMILY IN CAPTIVITY"})));
+end
+
+rule "THE BLIND ASSASSIN"
+    when
+            Answer(question == "DARK FICTION?", answer == "A MEMORY OF A TROUBLED FAMILY")
+    then
+       Prompts.Done(frame, "THE BLIND ASSASSIN", "MARGARET ATWOOD");
+end
+
+rule "LOVELY BONES"
+    when
+            Answer(question == "DARK FICTION?", answer == "GHOST IN THE ROOM")
+    then
+       Prompts.Done(frame, "LOVELY BONES", "ALICE SEBOLD");
+end
+
+rule "ROOM"
+    when
+            Answer(question == "DARK FICTION?", answer == "A FAMILY IN CAPTIVITY")
+    then
+       Prompts.Done(frame, "ROOM", "EMMA DONOGHUE");
+end
+
+rule "SCIENCE FICTION?"
+    when
+            Answer(question == "DARK FICTION?", answer == "NO")
+    then
+       insert(new Answer("SCIENCE FICTION?", Prompts.AskQuestion(frame, "SCIENCE FICTION?", new String[]{"NO", "ALIENS", "DARK FUTURES"})));
+end
+
+rule "ALIENS"
+    when
+            Answer(question == "SCIENCE FICTION?", answer == "ALIENS")
+    then
+       insert(new Answer("ALIENS", Prompts.AskQuestion(frame, "ALIENS", new String[]{"FIGHTING AN INVASION", "HUMOROUS SPACE ROMP"})));
+end
+
+rule "ENDER'S GAME"
+    when
+            Answer(question == "ALIENS", answer == "FIGHTING AN INVASION")
+    then
+       Prompts.Done(frame, "ENDER'S GAME", "ORSON SCOTT CARD");
+end
+
+rule "THE HITCHHIKER'S GALAXY"
+    when
+            Answer(question == "ALIENS", answer == "HUMOROUS SPACE ROMP")
+    then
+       Prompts.Done(frame, "THE HITCHHIKER'S GALAXY", "DOUGLAS ADAMS");
+end
+
+rule "DARK FUTURES"
+    when
+            Answer(question == "SCIENCE FICTION?", answer == "DARK FUTURES")
+    then
+       insert(new Answer("DARK FUTURES", Prompts.AskQuestion(frame, "DARK FUTURES", new String[]{"PRO LIFE", "FUTURE INTERNET", "HARVEST THE CLONES", "DRUG LORDS AND CLONES", "WHERE DO YOU THINK YOU ARE GOING"})));
+end
+
+rule "UNWIND"
+    when
+            Answer(question == "DARK FUTURES", answer == "PRO LIFE")
+    then
+       Prompts.Done(frame, "UNWIND", "NEAL SHUSTERMAN");
+end
+
+rule "FEED"
+    when
+            Answer(question == "DARK FUTURES", answer == "FUTURE INTERNET")
+    then
+       Prompts.Done(frame, "FEED", "M.T. ANDERSON");
+end
+
+rule "NEVER LET ME GO"
+    when
+            Answer(question == "DARK FUTURES", answer == "HARVEST THE CLONES")
+    then
+       Prompts.Done(frame, "NEVER LET ME GO", "KAZOU ISHIGURO");
+end
+
+rule "THE HOUSE OF THE SCORPION"
+    when
+            Answer(question == "DARK FUTURES", answer == "DRUG LORDS AND CLONES")
+    then
+       Prompts.Done(frame, "THE HOUSE OF THE SCORPION", "NANCY FARMER");
+end
+
+rule "WHERE DO YOU THINK YOU'RE GOING"
+    when
+            Answer(question == "DARK FUTURES", answer == "WHERE DO YOU THINK YOU ARE GOING")
+    then
+       Prompts.Done(frame, "WHERE DO YOU THINK YOU'RE GOING", "CATHRINE FISHER");
+end
+
+rule "CAN I HAVE DRAWINGS WITH MY WORDS?"
+    when
+            Answer(question == "SCIENCE FICTION?", answer == "NO")
+    then
+       insert(new Answer("CAN I HAVE DRAWINGS WITH MY WORDS?", Prompts.AskQuestion(frame, "CAN I HAVE DRAWINGS WITH MY WORDS?", new String[]{"NO", "COMING OF AGE AS AN OUTSIDER IN THE NEW LAND", "GROWING UP UNDER AN OPPRESSIVE REGIME", "SURVIVAL AND STRUGGLE"})));
+end
+
+rule "AMERICAN BORN CHINESE"
+    when
+            Answer(question == "CAN I HAVE DRAWINGS WITH MY WORDS?", answer == "COMING OF AGE AS AN OUTSIDER IN THE NEW LAND")
+    then
+       Prompts.Done(frame, "AMERICAN BORN CHINESE", "LUEN YANG & LARK PIEN");
+end
+
+rule "PERSEPOLIS"
+    when
+            Answer(question == "CAN I HAVE DRAWINGS WITH MY WORDS?", answer == "GROWING UP UNDER AN OPPRESSIVE REGIME")
+    then
+       Prompts.Done(frame, "PERSEPOLIS", "MARJANE STRAPI");
+end
+
+rule "MAUS"
+    when
+            Answer(question == "CAN I HAVE DRAWINGS WITH MY WORDS?", answer == "SURVIVAL AND STRUGGLE")
+    then
+       Prompts.Done(frame, "MAUS", "ART SPIEGELMAN");
+end
+
+rule "SHORT STORIES?"
+    when
+            Answer(question == "CAN I HAVE DRAWINGS WITH MY WORDS?", answer == "NO")
+    then
+       insert(new Answer("SHORT STORIES?", Prompts.AskQuestion(frame, "SHORT STORIES?", new String[]{"NO", "FANTASTICAL", "FAMILY LIFE", "SPORTS ON AND OFF THE FIELD"})));
+end
+
+rule "THE LONE RANGER AND TONTO FISTFIGHT IN HEAVEN"
+    when
+            Answer(question == "SHORT STORIES?", answer == "FANTASTICAL")
+    then
+       Prompts.Done(frame, "THE LONE RANGER AND TONTO FISTFIGHT IN HEAVEN", "SHERMAN ALEXIE");
+end
+
+rule "UNACCUSTOMED EARTH"
+    when
+            Answer(question == "SHORT STORIES?", answer == "FAMILY LIFE")
+    then
+       Prompts.Done(frame, "UNACCUSTOMED EARTH", "JHUMPA LAHIRI");
+end
+
+rule "ATHLETIC SHORTS"
+    when
+            Answer(question == "SHORT STORIES?", answer == "SPORTS ON AND OFF THE FIELD")
+    then
+       Prompts.Done(frame, "ATHLETIC SHORTS", "CHRIS CRUTCHER");
+end
+
+rule "SOMETHING DIFFRENT"
+    when
+            Answer(question == "SHORT STORIES?", answer == "NO")
+    then
+       insert(new Answer("SOMETHING DIFFRENT", Prompts.AskQuestion(frame, "SOMETHING DIFFRENT", new String[]{"NO", "BEAUTY AND THE BEAST IN NEW YORK", "PHILOSOPHICAL DOG", "SPORTS AND DRUGS"})));
+end
+
+rule "BEASTLY"
+    when
+            Answer(question == "SOMETHING DIFFRENT", answer == "BEAUTY AND THE BEAST IN NEW YORK")
+    then
+       Prompts.Done(frame, "BEASTLY", "ALEX FUNN");
+end
+
+rule "THE ART OF RACING IN THE RAIN"
+    when
+            Answer(question == "SOMETHING DIFFRENT", answer == "PHILOSOPHICAL DOG")
+    then
+       Prompts.Done(frame, "THE ART OF RACING IN THE RAIN", "GARTH STEIN");
+end
+
+rule "BYM CANDY"
+    when
+            Answer(question == "SOMETHING DIFFRENT", answer == "SPORTS AND DRUGS")
+    then
+       Prompts.Done(frame, "BYM CANDY", "CARL DEUKER");
+end
+
+rule "THE KIDS ARE ALRIGHT"
+    when
+            Answer(question == "SOMETHING DIFFRENT", answer == "NO")
+    then
+       insert(new Answer("THE KIDS ARE ALRIGHT", Prompts.AskQuestion(frame, "THE KIDS ARE ALRIGHT", new String[]{"TRANSFORMATIONS", "TOUGH SITUATIONS"})));
+end
+
+rule "TRANSFORMATIONS"
+    when
+            Answer(question == "THE KIDS ARE ALRIGHT", answer == "TRANSFORMATIONS")
+    then
+       insert(new Answer("TRANSFORMATIONS", Prompts.AskQuestion(frame, "TRANSFORMATIONS", new String[]{"AN UNDERDOG RISES", "TROUBLED YOUTH", "RELATIONSHIP STRIFE"})));
+end
+
+rule "TWISTED"
+    when
+            Answer(question == "TRANSFORMATIONS", answer == "AN UNDERDOG RISES")
+    then
+       Prompts.Done(frame, "TWISTED", "LAURIE ANDERSON");
+end
+
+rule "TRUE CONFESSION OF A HEARTLESS GIRL"
+    when
+            Answer(question == "TRANSFORMATIONS", answer == "TROUBLED YOUTH")
+    then
+       Prompts.Done(frame, "TRUE CONFESSION OF A HEARTLESS GIRL", "MARTHA BROOKS");
+end
+
+rule "JUST LISTEN"
+    when
+            Answer(question == "TRANSFORMATIONS", answer == "RELATIONSHIP STRIFE")
+    then
+       Prompts.Done(frame, "JUST LISTEN", "SARAH DESSEN");
+end
+
+rule "TOUGH SITUATIONS"
+    when
+            Answer(question == "THE KIDS ARE ALRIGHT", answer == "TOUGH SITUATIONS")
+    then
+       insert(new Answer("TOUGH SITUATIONS", Prompts.AskQuestion(frame, "TOUGH SITUATIONS", new String[]{"PICKING UP THE PIECES", "COMING OF AGE WITH FEW OPTIONS", "NEW DAD", "NEW MOM"})));
+end
+
+rule "IF I STAY"
+    when
+            Answer(question == "TOUGH SITUATIONS", answer == "PICKING UP THE PIECES")
+    then
+       Prompts.Done(frame, "IF I STAY", "GAYLE FORMAN");
+end
+
+rule "TYRELL"
+    when
+            Answer(question == "TOUGH SITUATIONS", answer == "COMING OF AGE WITH FEW OPTIONS")
+    then
+       Prompts.Done(frame, "TYRELL", "COE BOOTH");
+end
+
+rule "FIRST PART LAST"
+    when
+            Answer(question == "TOUGH SITUATIONS", answer == "NEW DAD")
+    then
+       Prompts.Done(frame, "FIRST PART LAST", "ANGELA JOHNSON");
+end
+
+rule "NOVEMBER BLUES"
+    when
+            Answer(question == "TOUGH SITUATIONS", answer == "NEW MOM")
+    then
+       Prompts.Done(frame, "NOVEMBER BLUES", "SHARON M. DRAPER");
+end
+
+rule "TRADEGY?"
+    when
+            Answer(question == "FICTION PLEASE", answer == "TAKE ME TO NONFICTION.")
+    then
+       insert(new Answer("TRADEGY?", Prompts.AskQuestion(frame, "TRADEGY?", new String[]{"NO", "A TALL COLD ONE?", "THE TITANIC"})));
+end
+
+rule "INTO THIN AIR"
+    when
+            Answer(question == "TRADEGY?", answer == "A TALL COLD ONE?")
+    then
+       Prompts.Done(frame, "INTO THIN AIR", "JON KRAKAUER");
+end
+
+rule "A NIGHT TO REMEMBER"
+    when
+            Answer(question == "TRADEGY?", answer == "THE TITANIC")
+    then
+       Prompts.Done(frame, "A NIGHT TO REMEMBER", "WALTER LORD");
+end
+
+rule "TRUE CRIME?"
+    when
+            Answer(question == "TRADEGY?", answer == "NO")
+    then
+       insert(new Answer("TRUE CRIME?", Prompts.AskQuestion(frame, "TRUE CRIME?", new String[]{"NO", "HOME ON RANGE", "WORLD'S FAIR MURDERERS"})));
+end
+
+rule "IN COLD BLOOD"
+    when
+            Answer(question == "TRUE CRIME?", answer == "HOME ON RANGE")
+    then
+       Prompts.Done(frame, "IN COLD BLOOD", "TRUMAN CAPOTE");
+end
+
+rule "DEVIL IN WHITE CITY"
+    when
+            Answer(question == "TRUE CRIME?", answer == "WORLD'S FAIR MURDERERS")
+    then
+       Prompts.Done(frame, "DEVIL IN WHITE CITY", "ERIK LARSON");
+end
+
+rule "TALES OF WAR?"
+    when
+            Answer(question == "TRUE CRIME?", answer == "NO")
+    then
+       insert(new Answer("TALES OF WAR?", Prompts.AskQuestion(frame, "TALES OF WAR?", new String[]{"NO", "WWII JAPAN", "POST 9/11 IRAQ"})));
+end
+
+rule "HIROSHIMA"
+    when
+            Answer(question == "TALES OF WAR?", answer == "WWII JAPAN")
+    then
+       Prompts.Done(frame, "HIROSHIMA", "JHON HERSAY");
+end
+
+rule "IMPERIAL LIFE IN THE EMERALD CITY"
+    when
+            Answer(question == "TALES OF WAR?", answer == "POST 9/11 IRAQ")
+    then
+       Prompts.Done(frame, "IMPERIAL LIFE IN THE EMERALD CITY", "RAJIV CHANDRASEKARAN");
+end
+
+rule "THE GOOD OL' DAYS?"
+    when
+            Answer(question == "TALES OF WAR?", answer == "NO")
+    then
+       insert(new Answer("THE GOOD OL' DAYS?", Prompts.AskQuestion(frame, "THE GOOD OL' DAYS?", new String[]{"NO", "AMERICAN CLASS STRUGGLE", "WOMAN AND JOURNALISM"})));
+end
+
+rule "NO ORDINARY TIME"
+    when
+            Answer(question == "THE GOOD OL' DAYS?", answer == "AMERICAN CLASS STRUGGLE")
+    then
+       Prompts.Done(frame, "NO ORDINARY TIME", "DORIS KEARNS GOODWIN");
+end
+
+rule "WAR, WOMEN AND THE NEWS"
+    when
+            Answer(question == "THE GOOD OL' DAYS?", answer == "WOMAN AND JOURNALISM")
+    then
+       Prompts.Done(frame, "WAR, WOMEN AND THE NEWS", "CATHRINE GOURLEY");
+end
+
+rule "SCIENCE?"
+    when
+            Answer(question == "THE GOOD OL' DAYS?", answer == "NO")
+    then
+       insert(new Answer("SCIENCE?", Prompts.AskQuestion(frame, "SCIENCE?", new String[]{"NO", "STRING THEORY", "HUMAN EVOLUTION"})));
+end
+
+rule "THE ELEGANT UNIVERSE"
+    when
+            Answer(question == "SCIENCE?", answer == "STRING THEORY")
+    then
+       Prompts.Done(frame, "THE ELEGANT UNIVERSE", "BRAIN GREENE");
+end
+
+rule "THE NAKED APE"
+    when
+            Answer(question == "SCIENCE?", answer == "HUMAN EVOLUTION")
+    then
+       Prompts.Done(frame, "THE NAKED APE", "DESMOND MORRIS");
+end
+
+rule "SOCIAL THEORY?"
+    when
+            Answer(question == "SCIENCE?", answer == "NO")
+    then
+       insert(new Answer("SOCIAL THEORY?", Prompts.AskQuestion(frame, "SOCIAL THEORY?", new String[]{"NO", "CAUSE AND EFFECT", "AN IDEA TAKES HOLD"})));
+end
+
+rule "FREAKONOMICS"
+    when
+            Answer(question == "SOCIAL THEORY?", answer == "CAUSE AND EFFECT")
+    then
+       Prompts.Done(frame, "FREAKONOMICS", "STEVEN D. LEVITT & STEPHEN J. DUBNER");
+end
+
+rule "TIPPING POINT"
+    when
+            Answer(question == "SOCIAL THEORY?", answer == "AN IDEA TAKES HOLD")
+    then
+       Prompts.Done(frame, "TIPPING POINT", "MALCOLM GLADWELL");
+end
+
+rule "EPICURIOUS"
+    when
+            Answer(question == "SOCIAL THEORY?", answer == "NO")
+    then
+       insert(new Answer("EPICURIOUS", Prompts.AskQuestion(frame, "EPICURIOUS", new String[]{"NO", "JUNK FOOD", "DIFFRENT FOOD"})));
+end
+
+rule "FAST FOOD NATION"
+    when
+            Answer(question == "EPICURIOUS", answer == "JUNK FOOD")
+    then
+       Prompts.Done(frame, "FAST FOOD NATION", "ERIC SCHLOSSER");
+end
+
+rule "THE OMNIVORE'S DILEMMA: A NATURAL HISTORY OF FOUR MEALS"
+    when
+            Answer(question == "EPICURIOUS", answer == "DIFFRENT FOOD")
+    then
+       Prompts.Done(frame, "THE OMNIVORE'S DILEMMA: A NATURAL HISTORY OF FOUR MEALS", "MICHAEL POLLAN");
+end
+
+rule "SPORTS?"
+    when
+            Answer(question == "EPICURIOUS", answer == "NO")
+    then
+       insert(new Answer("SPORTS?", Prompts.AskQuestion(frame, "SPORTS?", new String[]{"NO", "SWIMMING THE DISTANCE", "THE GREAT GAME"})));
+end
+
+rule "SWIMMING ANTARCTICA"
+    when
+            Answer(question == "SPORTS?", answer == "SWIMMING THE DISTANCE")
+    then
+       Prompts.Done(frame, "SWIMMING ANTARCTICA", "LYNNE COX");
+end
+
+rule "FRIDAY NIGHT LIGHTS"
+    when
+            Answer(question == "SPORTS?", answer == "THE GREAT GAME")
+    then
+       Prompts.Done(frame, "FRIDAY NIGHT LIGHTS", "H. G. BISSINGER");
+end
+
+rule "BIOGRAPHY"
+    when
+            Answer(question == "SPORTS?", answer == "NO")
+    then
+       insert(new Answer("BIOGRAPHY", Prompts.AskQuestion(frame, "BIOGRAPHY", new String[]{"NO", "NICE CELLS", "NUMBER TWO"})));
+end
+
+rule "THE IMMORTAL LIFE OF HENRIETTA LACKS"
+    when
+            Answer(question == "BIOGRAPHY", answer == "NICE CELLS")
+    then
+       Prompts.Done(frame, "THE IMMORTAL LIFE OF HENRIETTA LACKS", "REBECCA SKLOOT");
+end
+
+rule "JHON ADAMS"
+    when
+            Answer(question == "BIOGRAPHY", answer == "NUMBER TWO")
+    then
+       Prompts.Done(frame, "JHON ADAMS", "DAVID MCCULLOUGH");
+end
+
+rule "AUTO-BIOGRAPHY?"
+    when
+            Answer(question == "BIOGRAPHY", answer == "NO")
+    then
+       insert(new Answer("AUTO-BIOGRAPHY?", Prompts.AskQuestion(frame, "AUTO-BIOGRAPHY?", new String[]{"NO", "USE YOUR WORDS", "HACKS"})));
+end
+
+rule "I KNOW WHY THE CAGED BIRD SINGS"
+    when
+            Answer(question == "AUTO-BIOGRAPHY?", answer == "USE YOUR WORDS")
+    then
+       Prompts.Done(frame, "I KNOW WHY THE CAGED BIRD SINGS", "MAYA ANGELOU");
+end
+
+rule "GHOST IN THE WIRES"
+    when
+            Answer(question == "AUTO-BIOGRAPHY?", answer == "HACKS")
+    then
+       Prompts.Done(frame, "GHOST IN THE WIRES", "KEVIN MITNICK");
+end
+
 
